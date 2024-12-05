@@ -1,0 +1,6 @@
+src/css
+src/img/*
+src/movie/*
+
+!src/img/chouette-de-dijon.jpg
+!src/movie/movie_test.mp4
