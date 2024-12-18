@@ -4,3 +4,6 @@ src/movie/*
 
 !src/img/chouette-de-dijon.jpg
 !src/movie/movie_test.mp4
+
+package-lock.json
+node_modules/
