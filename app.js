@@ -1,6 +1,8 @@
 const express = require('express');
 const mysql = require('mysql2'); // Importer mysql2 pour la connexion à la base de données
 const path = require('path')
+const userRoutes = require('./routes/route'); // Importer le routeur
+const bodyParser = require('body-parser');
 
 
 const db = mysql.createConnection({
@@ -20,17 +22,20 @@ console.log('Connecté à la base de données MySQL');
 
 const app = express();
 const port = 3000;
-
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+
+
+const users = [
+    { username: 'admin', password: '$2b$10$7X.lXXh6l.Bd2cBc.NI9lOEe.OF21W/xHCMZupFfR9z7Ty/C2NcZ2' } // Mot de passe: "password123"
+];
 
 app.use('/src', express.static(path.join(__dirname, 'src'))); // Rendre les fichiers dans le dossier src disponible
 
-
 // Route pour afficher le home de contact
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'home.html'));
-});
+app.get('/', userRoutes)
+app.get('/login', userRoutes)
+app.use(bodyParser.urlencoded({ extended: true }));
+app.post('/login', userRoutes)
 
 // Démarrer le serveur
 app.listen(port, () => {
