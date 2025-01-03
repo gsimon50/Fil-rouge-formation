@@ -39,4 +39,8 @@ router.post('/login',(req,res) => {
     res.send(`Bienvenue ${username} !`);
 });
 
+router.post('/register',(req,res) => {
+    return res.status(200).send('Putin tu es une machine');
+});
+
 module.exports = router;

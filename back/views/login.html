@@ -19,14 +19,18 @@
     
     <div id="content">
 
-        <h1>Connexion</h1>
+        <h1 id="title">Connexion</h1>
         <div id="form_connect">
-            <form action="/login" method="POST">
+            <form id="formulaire_connexion" action="/login" method="POST">
                 <input type="text" name="username" placeholder="Username">
                 <input type="password" name="password" placeholder="Password">
                 <input type="submit" value="Entrer">
             </form>
         </div>
+        <a id="NoLogin" data-value="GoToRegister">Vous n'avez toujours pas de compte ?</a>
     </div>
 </body>
+
+<script src="src/script/script_login.js"></script>
+
 </html>

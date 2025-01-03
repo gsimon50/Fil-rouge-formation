@@ -36,6 +36,7 @@ app.get('/', userRoutes)
 app.get('/login', userRoutes)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/login', userRoutes)
+app.post('/register', userRoutes)
 
 // Démarrer le serveur
 app.listen(port, () => {
