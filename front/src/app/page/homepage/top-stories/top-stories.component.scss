@@ -1,0 +1,53 @@
+
+@import '../../../app.component.scss';
+
+/****** Gestion Top Stories ******/
+
+#top_story #all_stories{
+    display: flex;
+    .element_stories {
+        position: relative;
+        max-width: 33%;
+        margin: 0 25px;
+        padding: 25px;
+        border-radius: 10px;
+
+        .figure img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            margin-top: 10px;
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+
+        .info{
+            margin: 25px 0;
+            display: flex;
+
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50px;
+                border: black 1px solid;
+                aspect-ratio: 1 / 1;
+                vertical-align: middle;
+            }
+
+            .text_presentation{
+                margin:auto;
+                margin-left:10px;
+            }
+        }
+
+        a {
+            font-weight: bold;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}

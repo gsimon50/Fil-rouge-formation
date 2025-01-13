@@ -18,5 +18,6 @@ import { MostPopularComponent } from "../most-popular/most-popular.component";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  Title = "Hey, we're blogxpress. See our thoughts, stories and ideas.";
 
 }

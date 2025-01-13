@@ -2,6 +2,14 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
+
+
+const corsOptions = {
+    origin: 'http://localhost:4200', // Frontend autorisé
+    methods: ['GET', 'POST'],        // Méthodes autorisées
+    allowedHeaders: ['Content-Type'] // En-têtes autorisés
+};
 
 
 const projectRoot = process.cwd();
@@ -42,5 +50,43 @@ router.post('/login',(req,res) => {
 router.post('/register',(req,res) => {
     return res.status(200).send('Putin tu es une machine');
 });
+
+router.get('/api/recherche', cors(corsOptions), (req, res) => {
+    return res.json(
+        {
+            "results": {
+                "result": [
+                    {
+                        "id": "0",
+                        "title": "Smarter Food Choices 101 Tips for busy Women",
+                        "tag": "Food",
+                        "author": "Sandra Gordon",
+                        "publish": "2025-01-01",
+                        "img" : "chouette-de-dijon.jpg"
+                    },
+                    { 
+                        "id": "1",
+                        "title": "Air pods pro with wirless charging case",
+                        "tag": "Design",
+                        "author": "Kristin Watson",
+                        "publish": "2025-01-01",
+                        "img" : "chouette-de-dijon.jpg"
+        
+                    },
+                    { 
+                        "id": "2",
+                        "title": "Underwater exercise is used strengthen weak muscles",
+                        "tag": "Sports",
+                        "author": "Jenny Wilson",
+                        "publish": "2025-01-01",
+                        "img" : "chouette-de-dijon.jpg"
+                    }
+                ]
+            }
+        }
+
+    );
+});
+
 
 module.exports = router;

@@ -1,0 +1,31 @@
+{
+    "results": {
+        "result": [
+            {
+                "id": "0",
+                "title": "Smarter Food Choices 101 Tips for busy Women",
+                "tag": "Food",
+                "author": "Sandra Gordon",
+                "publish": "2025-01-01",
+                "img" : "chouette-de-dijon.jpg"
+            },
+            { 
+                "id": "1",
+                "title": "Air pods pro with wirless charging case",
+                "tag": "Design",
+                "author": "Kristin Watson",
+                "publish": "2025-01-01",
+                "img" : "chouette-de-dijon.jpg"
+
+            },
+            { 
+                "id": "2",
+                "title": "Underwater exercise is used strengthen weak muscles",
+                "tag": "Sports",
+                "author": "Jenny Wilson",
+                "publish": "2025-01-01",
+                "img" : "chouette-de-dijon.jpg"
+            }
+        ]
+    }
+}

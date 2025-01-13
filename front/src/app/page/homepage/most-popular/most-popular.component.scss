@@ -1,0 +1,25 @@
+@import '../../../app.component.scss';
+
+#allElementsPopular {
+    display: flex;
+    flex-wrap: wrap;
+    .elementPopular {
+        display: flex;
+        padding: 10px 20px;
+        margin: 20px;
+        flex: 1 1 40%;
+        img {
+            width: 150px;
+            height: 120px;
+            margin: auto 0;
+            padding: 0 10px;
+            border-radius: 25px;
+            object-fit: cover;
+        }
+        .popular-content {
+            p {
+                font-size: 0.8em;
+            }            
+        }
+    }
+}

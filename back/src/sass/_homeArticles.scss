@@ -49,10 +49,6 @@
 
         .tag{
             display: inline-block;
-            padding: 3px 8px;
-            font-size: 10px;
-            text-transform: uppercase;
-            border-radius: 5px;
         }
 
         h3{
@@ -111,8 +107,6 @@
             padding: 15px;
 
             .tag{
-                background: #ddd;
-                color: #333;
                 margin-bottom: 10px;
             }
         }
@@ -147,7 +141,6 @@
                 flex:1;
                 color: white;
                 .tag{
-                    background: rgba(255, 255, 255, 0.2);
                     margin-bottom: 5px;
                 }
                 

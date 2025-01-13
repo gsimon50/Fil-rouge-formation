@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss'
+
 })
 export class ArticleComponent {
 
