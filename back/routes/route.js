@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+const { getArticles } = require('../controler/articles');
 
 
 const corsOptions = {
@@ -51,41 +52,32 @@ router.post('/register',(req,res) => {
     return res.status(200).send('Putin tu es une machine');
 });
 
-router.get('/api/recherche', cors(corsOptions), (req, res) => {
-    return res.json(
-        {
-            "results": {
-                "result": [
-                    {
-                        "id": "0",
-                        "title": "Smarter Food Choices 101 Tips for busy Women",
-                        "tag": "Food",
-                        "author": "Sandra Gordon",
-                        "publish": "2025-01-01",
-                        "img" : "chouette-de-dijon.jpg"
-                    },
-                    { 
-                        "id": "1",
-                        "title": "Air pods pro with wirless charging case",
-                        "tag": "Design",
-                        "author": "Kristin Watson",
-                        "publish": "2025-01-01",
-                        "img" : "chouette-de-dijon.jpg"
+router.get('/api/recherche', cors(corsOptions), async  (req, res) => {
+    try {
+        // Utilise un délai artificiel avec `setTimeout` si nécessaire
+        await new Promise((resolve) => setTimeout(resolve, 1000)); 
         
-                    },
-                    { 
-                        "id": "2",
-                        "title": "Underwater exercise is used strengthen weak muscles",
-                        "tag": "Sports",
-                        "author": "Jenny Wilson",
-                        "publish": "2025-01-01",
-                        "img" : "chouette-de-dijon.jpg"
-                    }
-                ]
-            }
-        }
+        // Appelle la fonction asynchrone pour récupérer les articles
+        articles = await getArticles(null, 5); // Assurez-vous que getArticles retourne une promesse
+        return res.json(articles); // Envoie les données en réponse
+    } catch (error) {
+        console.error("Erreur dans /api/recherche :", error);
+        return res.status(500).json({ error: "Erreur interne du serveur" });
+    }
+});
 
-    );
+router.get('/api/stories', cors(corsOptions), async  (req, res) => {
+    try {
+        // Utilise un délai artificiel avec `setTimeout` si nécessaire
+        await new Promise((resolve) => setTimeout(resolve, 1000)); 
+        
+        // Appelle la fonction asynchrone pour récupérer les articles
+        articles = await getArticles("Stories", 5); // Assurez-vous que getArticles retourne une promesse
+        return res.json(articles); // Envoie les données en réponse
+    } catch (error) {
+        console.error("Erreur dans /api/recherche :", error);
+        return res.status(500).json({ error: "Erreur interne du serveur" });
+    }
 });
 
 
