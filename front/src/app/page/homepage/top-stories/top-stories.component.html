@@ -1,14 +1,16 @@
-<div id="top_story" class="home_element">
-    <h2>Top Stories</h2>
+@if (articles[0] != null) {
 
-    <div id="all_stories">
-        <div *ngFor="let article of articles; let i = index" class="element_stories" style="background-color:#FDEBDD">
-            <span class="figure"><img src="img/{{article.Picture}}" alt=""></span>
-            <span class="tag">{{ article.Tag }}</span>
-            <h3>{{ article.Title }}</h3>
-            <div class="info"><img src="img/chouette-de-dijon.jpg" alt=""><span class="text_presentation"> Sergio Pliego | 3 min read | 9k</span></div>
-            <a>See Details</a>
+    <div id="top_story" class="home_element">
+        <h2>Top Stories</h2>
+        <div id="all_stories">
+            <div *ngFor="let article of articles; let i = index" class="element_stories" style="background-color:#FDEBDD">
+                <span class="figure"><img src="img/{{article.Picture}}" alt=""></span>
+                <span class="tag">{{ article.Tag }}</span>
+                <h3>{{ article.Title }}</h3>
+                <div class="info"><img src="img/chouette-de-dijon.jpg" alt=""><span class="text_presentation"> Sergio Pliego | 3 min read | 9k</span></div>
+                <a>See Details</a>
+            </div>
         </div>
+        
     </div>
-
-</div>
+}
