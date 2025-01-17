@@ -14,6 +14,23 @@ export class ArticlesService {
   constructor(private http: HttpClient) { }
 
   getRecherche(searchText: any): Observable<APIdataArticles> {
-    return this.http.get<APIdataArticles>('http://localhost:3000/api/recherche');
+    return this.http.get<APIdataArticles>('http://localhost:3000/api/article&recherche');
+
+  }
+
+  getStories() {
+    return this.http.get('http://localhost:3000/api/article&stories');
+  }
+
+  getRecentArticle() {
+    return this.http.get('http://localhost:3000/api/article&recent');
+  }
+
+  getVideo() {
+    return this.http.get('http://localhost:3000/api/article&video');
+  }
+
+  getPopular() {
+    return this.http.get('http://localhost:3000/api/article&popular');
   }
 }

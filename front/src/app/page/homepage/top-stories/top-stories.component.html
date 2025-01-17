@@ -2,25 +2,11 @@
     <h2>Top Stories</h2>
 
     <div id="all_stories">
-        <div class="element_stories" style="background-color:#FDEBDD">
-            <span class="figure"><img src="img/chouette-de-dijon.jpg" alt=""></span>
-            <span class="tag">FOOD</span>
-            <h3>Smarter Food Choices 101 Tips for busy Women</h3>
+        <div *ngFor="let article of articles; let i = index" class="element_stories" style="background-color:#FDEBDD">
+            <span class="figure"><img src="img/{{article.Picture}}" alt=""></span>
+            <span class="tag">{{ article.Tag }}</span>
+            <h3>{{ article.Title }}</h3>
             <div class="info"><img src="img/chouette-de-dijon.jpg" alt=""><span class="text_presentation"> Sergio Pliego | 3 min read | 9k</span></div>
-            <a>See Details</a>
-        </div>
-        <div class="element_stories" style="background-color:#F0FECD">
-            <span class="figure"><img src="img/chouette-de-dijon.jpg" alt=""></span>
-            <span class="tag">Design</span>
-            <h3>Air pods pro with wirless charging case</h3>
-            <div class="info"><img src="img/chouette-de-dijon.jpg" alt=""><span class="text_presentation"> Kristin Watson | 9 min read | 9k </span></div>
-            <a>See Details</a>
-        </div>
-        <div class="element_stories" style="background-color: #F1D0FB;">
-            <span class="figure"><img src="img/chouette-de-dijon.jpg" alt=""></span>
-            <span class="tag">Sports</span>
-            <h3>Underwater exercise is used strengthen weak muscles</h3>
-            <div class="info"><img src="img/chouette-de-dijon.jpg" alt=""><span class="text_presentation"> Jenny Wilson | 7 min read | 9k</span></div>
             <a>See Details</a>
         </div>
     </div>

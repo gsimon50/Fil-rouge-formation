@@ -9,7 +9,7 @@ const db = mysql.createConnection({
 });
 
 
-async function getArticles(type,limit) {
+async function getArticles(type,limit,orderby) {
 
     let categorie = null;
 
@@ -22,6 +22,9 @@ async function getArticles(type,limit) {
             query = 'SELECT * FROM articles';
             if (type !== null) {
                 query += ` WHERE Catégorie = '${categorie}'`;
+            }
+            if (orderby !== null) {
+                query += ` ORDER BY id ${orderby}`;
             }
             if (limit !== null) {
                 query += ` LIMIT ${limit}`;

@@ -35,8 +35,7 @@ app.get('/login', userRoutes)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/login', userRoutes)
 app.post('/register', userRoutes)
-app.get('/api/recherche', userRoutes)
-app.get('/api/stories', userRoutes)
+app.get('/api/article:type', userRoutes)
 
 // Démarrer le serveur
 app.listen(port, () => {
