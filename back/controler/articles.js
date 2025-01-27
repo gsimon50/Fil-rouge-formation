@@ -56,4 +56,34 @@ function getCategorie(type){
     })
 }
 
-module.exports =  { getArticles } ;
+function setArticle(data){
+    query = "INSERT INTO users (Title, Picture,Homepage, Tag, Catégorie) VALUES ( ?,?,?,?,?)";
+    setTimeout(() => {
+        catExist = getCategorie(data.Catégorie);
+        if (catExist === null){
+            catExist = setCategorie(data.Catégorie);
+        }
+        db.query(query, [data.Title,data.Picture,data.Homepage,data.Tag,catExist], (error, results) => {
+            if (error) {
+                resolve(reject(error));
+            }
+            console.log(results)
+            resolve (results);
+        });
+    }, 1000);
+}
+
+function setCategorie(data){
+    query = "INSERT INTO categorie (nom) VALUES ( ?)";
+    setTimeout(() => {
+        db.query(query, [data], (error, results) => {
+            if (error) {
+                resolve(reject(error));
+            }
+            console.log(results)
+            resolve (results);
+        });
+    }, 1000);
+}
+
+module.exports =  { getArticles, setArticle } ;

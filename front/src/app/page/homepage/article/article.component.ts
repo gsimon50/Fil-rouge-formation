@@ -20,7 +20,7 @@ export class ArticleComponent {
           console.log(error);
         },
         complete : () => {
-          console.log('Requete ApiArticle terminée');
+          console.log('Requete ApiArticle de ArticleComponent terminée');
         }
   
       });

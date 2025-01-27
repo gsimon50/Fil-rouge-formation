@@ -1,0 +1,17 @@
+<h1>Création d'un Article</h1>
+<form (ngSubmit)="onSubmit()" class="login-container">
+    <label for="Title">Titre :</label>
+    <input type="text" id="Title" [(ngModel)]="Title" name="Title" required>
+
+    <label for="Tag">Tag:</label>
+    <input type="text" id="Tag" [(ngModel)]="Tag" name="Tag" required>
+
+    <label for="Picture">Image:</label>
+    <input type="file" id="Picture" [(ngModel)]="Picture" name="Picture" required>
+
+    <label for="Categorie">Catégorie:</label>
+    <input type="text" id="Categorie" [(ngModel)]="Category" name="Categorie" required>
+
+    <button type="submit">Enregistrer le nouveau article</button>
+    <br>
+</form>

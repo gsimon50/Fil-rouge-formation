@@ -32,10 +32,14 @@ app.use('/src', express.static(path.join(__dirname, 'src'))); // Rendre les fich
 // Route pour afficher le home de contact
 app.get('/', userRoutes)
 app.get('/login', userRoutes)
+app.get('/register', userRoutes)
+app.get('/api/article:type', userRoutes)
+app.post('/api/article', userRoutes)
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/login', userRoutes)
 app.post('/register', userRoutes)
-app.get('/api/article:type', userRoutes)
+
 
 // Démarrer le serveur
 app.listen(port, () => {
