@@ -2,6 +2,14 @@
 
 /****** General ******/
 
+body {
+    scroll-snap-type: y mandatory;
+}
+
+.home_element{
+    scroll-snap-align: start;
+}
+
 #content{
     width: 100%;
     margin:auto;

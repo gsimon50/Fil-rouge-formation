@@ -19,9 +19,10 @@ const corsOptions = {
 const projectRoot = process.cwd();
 
 // Simuler une base de données (pour un vrai projet, utilisez une base de données comme MongoDB ou MySQL)
-const users = [
-    { username: 'admin', password: '$2b$10$7X.lXXh6l.Bd2cBc.NI9lOEe.OF21W/xHCMZupFfR9z7Ty/C2NcZ2' } // Mot de passe: "password123"
-];
+//const users = [
+//    { username: 'admin', password: '$2b$10$7X.lXXh6l.Bd2cBc.NI9lOEe.OF21W/xHCMZupFfR9z7Ty/C2NcZ2' } // Mot de passe: "password123"
+//];
+
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(projectRoot, 'views', 'home.html'));
@@ -104,7 +105,15 @@ router.get('/api/article&:type', cors(corsOptions), async  (req, res) => {
 });
 
 router.post('/api/article', cors(corsOptions), async  (req, res) => {
+
+    const bodyData = req.body; // Paramètres POST
+    res.json({
+        method: 'POST',
+        receivedData: bodyData,
+    });
+
     const data = req.body; // Récupère les données de la requête POST
+    console.log(data)
     try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); 
         // Appelle la fonction asynchrone pour insérer un article

@@ -27,10 +27,18 @@ const users = [
     { username: 'admin', password: '$2b$10$7X.lXXh6l.Bd2cBc.NI9lOEe.OF21W/xHCMZupFfR9z7Ty/C2NcZ2' } // Mot de passe: "password123"
 ];
 
+// Middleware pour parser les données JSON
+app.use(express.json());
+
+// Middleware pour parser les données URL-encodées
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/src', express.static(path.join(__dirname, 'src'))); // Rendre les fichiers dans le dossier src disponible
 
 // Route pour afficher le home de contact
-app.get('/', userRoutes)
+// a supprimer
+    app.get('/', userRoutes)
+//
 app.get('/login', userRoutes)
 app.get('/register', userRoutes)
 app.get('/api/article:type', userRoutes)

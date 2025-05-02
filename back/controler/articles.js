@@ -59,6 +59,8 @@ function getCategorie(type){
 function setArticle(data){
     query = "INSERT INTO users (Title, Picture,Homepage, Tag, Catégorie) VALUES ( ?,?,?,?,?)";
     setTimeout(() => {
+        console.log(data);
+
         catExist = getCategorie(data.Catégorie);
         if (catExist === null){
             catExist = setCategorie(data.Catégorie);

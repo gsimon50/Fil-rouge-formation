@@ -36,30 +36,39 @@ async function getUser(data) {
     });
 }
 
-
+/**
+ * 
+ * @param {*} data 
+ * @returns 
+ */
 async function setUser(data) {
     return new Promise((resolve, reject) => {
         if((data.username == "") || (data.password == "") || (data.type == "")){
             resolve(reject("error data not valid"));
         } else {
-            username = data.username;
-            password = data.password;
-            type = data.type;
-
-            if(type == "register"){
-                query = "INSERT INTO users (Name, Password) VALUES ( ?, ?)";
-                setTimeout(() => {
-                    db.query(query, [username,password], (error, results) => {
-                        if (error) {
-                            resolve(reject(error));
-                        }
-                        console.log(results)
-                        resolve (results);
-                    });
-                }, 1000);
+            if(getUser(data)){
+                resolve(reject("error user déjà existant"));
             } else {
-                resolve(reject("error data not valid"));
+                username = data.username;
+                password = data.password;
+                type = data.type;
+    
+                if(type == "register"){
+                    query = "INSERT INTO users (Name, Password) VALUES ( ?, ?)";
+                    setTimeout(() => {
+                        db.query(query, [username,password], (error, results) => {
+                            if (error) {
+                                resolve(reject(error));
+                            }
+                            console.log(results)
+                            resolve (results);
+                        });
+                    }, 1000);
+                } else {
+                    resolve(reject("error data not valid"));
+                }
             }
+           
         }
     });
 }

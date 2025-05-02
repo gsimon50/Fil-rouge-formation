@@ -34,7 +34,6 @@ export class LoginComponent {
 
     this.cookieValue = this.cookieService.get('user');
 
-
     if (this.type === 'register') {
 
       this.LoginService.setRegister(dataAPI).subscribe({

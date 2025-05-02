@@ -1,7 +1,8 @@
     <h1>{{Title}}</h1>
     <form (ngSubmit)="onSubmit()" class="login-container">
         <label for="username">Username:</label>
-        <input type="text" id="username" [(ngModel)]="username" name="username" required>
+        <!-- Mettre en place l'adresse mail a la place -->
+        <input type="mail" id="username" [(ngModel)]="username" name="username" required>
     
         <label for="password">Password:</label>
         <input type="password" id="password" [(ngModel)]="password" name="password" required>
