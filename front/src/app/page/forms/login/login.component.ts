@@ -66,9 +66,10 @@ export class LoginComponent {
       });
     } else {
       this.LoginService.getLogin(dataAPI).subscribe({
-        next : (data) => {
+        next : (data :  { id: string }) => {
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('userName', this.email);
+            localStorage.setItem('idUser', data.id);
             this.router.navigate(['/user']);
         },
         error : (error : any) => {

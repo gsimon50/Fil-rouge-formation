@@ -34,6 +34,10 @@ export class ArticlesService {
     return this.http.get('http://localhost:3000/api/article&popular');
   }
 
+  getArticleFromUser(idUser: any) {
+    return this.http.post('http://localhost:3000/api/article', {id : idUser, functionCall :"getArticleUser" });
+  }
+
   setArticle(data: any) {
     return this.http.post('http://localhost:3000/api/article', data);
   }

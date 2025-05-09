@@ -9,7 +9,7 @@ import { CommonModule,JsonPipe } from '@angular/common';
   styleUrl: './most-popular.component.scss'
 })
 export class MostPopularComponent {
- articles: any;
+  articles: any;
   constructor(private apiArticles: ArticlesService) { 
     this.apiArticles.getPopular().subscribe({
       next : (data) => {

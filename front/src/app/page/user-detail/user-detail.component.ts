@@ -4,9 +4,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { UserArticleComponent } from './user-article/user-article.component';
+
 @Component({
   selector: 'app-user-detail',
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, UserArticleComponent],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
@@ -25,9 +27,9 @@ export class UserDetailComponent {
 
   ngOnInit(): void {
     // Charger l'état de connexion depuis le localStorage
-    const storedLoginState = localStorage.getItem('isLoggedIn');
+    const storedLoginState = typeof window !== 'undefined' ? window.localStorage.getItem('isLoggedIn') : null;
     this.isLoggedIn = storedLoginState === 'true';
-    this.email = localStorage.getItem('userName') || '';
+    this.email = typeof window !== 'undefined' ? window.localStorage.getItem('userName') || '' : '';
 
     // Si l'utilisateur est déjà connecté, rediriger vers la page d'accueil
     if (!this.isLoggedIn) {
