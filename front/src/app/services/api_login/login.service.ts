@@ -12,7 +12,6 @@ export class LoginService {
 
   setRegister(dataAPI: any){
     const httpParams = new HttpParams({ fromObject: dataAPI });
-    console.log(httpParams)
     return this.http.get('http://localhost:3000/register', { params: httpParams } );
   }
 

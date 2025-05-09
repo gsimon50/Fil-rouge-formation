@@ -1,21 +1,24 @@
-<div *ngIf="!isLoggedIn; else loggedInView">
-    <form (ngSubmit)="onLogin()" class="login-form">
-        <h2>Connexion</h2>
-        <div>
-            <label for="email">Email :</label>
-            <input type="email" id="email" [(ngModel)]="email" name="email" required />
-        </div>
-        <div>
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" [(ngModel)]="password" name="password" required />
-        </div>
-        <button type="submit">Se connecter</button>
-    </form>
-</div>
+<h1>Détails de l'utilisateur</h1>
 
-<ng-template #loggedInView>
-    <div class="welcome-view">
-        <h2>Bienvenue, {{ email }} !</h2>
-        <button (click)="onLogout()">Se déconnecter</button>
-    </div>
-</ng-template>
+<form (ngSubmit)="onSubmit()" class="user-detail-container">
+    <label for="name">Nom:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="user.name" (ngModelChange)="updateUser('name', $event)"><br><br>
+
+    <label for="email">Adresse mail:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="user.email" (ngModelChange)="updateUser('email', $event)"><br><br>
+
+    <label for="password">Mot de passe:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="user.password" (ngModelChange)="updateUser('password', $event)"><br><br>
+
+    <button type="submit">Soumettre</button>
+</form>
+
+<h1 >Articles créés par vous</h1>
+<ul>
+    <li *ngFor="let article of user.articles">
+        <a [routerLink]="['/edit-article']">
+            <h4>titre</h4>
+            <img [src]="" alt="" style="max-width: 100px; max-height: 100px;">
+        </a>
+    </li>
+</ul>

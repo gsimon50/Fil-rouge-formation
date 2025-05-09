@@ -37,7 +37,7 @@ app.use('/src', express.static(path.join(__dirname, 'src'))); // Rendre les fich
 
 // Route pour afficher le home de contact
 // a supprimer
-    app.get('/', userRoutes)
+    //app.get('/', userRoutes)
 //
 app.get('/login', userRoutes)
 app.get('/register', userRoutes)
@@ -47,6 +47,30 @@ app.post('/api/article', userRoutes)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/login', userRoutes)
 app.post('/register', userRoutes)
+
+
+app.get('/', (req, res) => {
+    const routes = [];
+  
+    app._router.stack.forEach((middleware) => {
+      if (middleware.route) {
+        // Route classique
+        const method = Object.keys(middleware.route.methods)[0].toUpperCase();
+        routes.push({ method, path: middleware.route.path });
+      } else if (middleware.name === 'router') {
+        // Router imbriqué (ex: avec express.Router())
+        middleware.handle.stack.forEach((handler) => {
+          const route = handler.route;
+          if (route) {
+            const method = Object.keys(route.methods)[0].toUpperCase();
+            routes.push({ method, path: route.path });
+          }
+        });
+      }
+    });
+  
+    res.json(routes);
+});
 
 
 // Démarrer le serveur

@@ -1,7 +1,9 @@
 <div class="menu">
     <ul>
         <li><a href="/">Accueil</a></li>
-        <li><a routerLink="/menu/2">Article</a></li>
-        <li><a href="/user">Mon Compte</a></li>
+        <li><a href="/menu/2">Article</a></li>
+        <li *ngIf="!isLoggedIn"><a href="/login">Connexion</a></li>
+        <li *ngIf="isLoggedIn"><a href="/user">Mon Compte</a></li>
+        <li *ngIf="isLoggedIn"><a href="/logout">Deconnexion</a></li>
     </ul>
 </div>

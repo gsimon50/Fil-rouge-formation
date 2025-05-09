@@ -34,13 +34,15 @@ router.get('/login', cors(corsOptions), async  (req, res) => {
     try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); 
         var user = await getUser(params); // Assurez-vous que getUser retourne une promesse
-        if (user){
-            res.cookie('user', params.username, { httpOnly: true });
-            res.send(`Bienvenue ${params.username} !`);
-            return true;
+        console.log(user);
+        if (user.length > 0) {
+            console.log("Utilisateur trouvé !")
+            return res.status(200).json({ message: "Utilisateur trouvé" });
         } else {
-            return false;
+            console.log("Utilisateur non trouvé !")
+            return res.status(401).json({ error: "Nom d'utilisateur ou mot de passe incorrect" });
         }
+    
     } catch (error){
         console.error("Erreur dans /api/login :", error);
         return res.status(500).json({ error: "Erreur interne du serveur" });
@@ -71,11 +73,15 @@ router.get('/register', cors(corsOptions), async  (req, res) => {
     try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); 
         var user = await setUser(params); // Assurez-vous que setUser retourne une promesse
-        if (user){
-            return true;
+        if (user.userexist){
+            console.log("Utilisateur déjà existant !")
+            return res.status(409).json({ error: "Utilisateur déjà existant" });
+        } else if (user.serverStatus == 2){
+            return res.status(200).json({ message: "Utilisateur créé avec succès" });
         } else {
-            return false;
+            return res.status(500).json({ error: "Erreur interne du serveur" });
         }
+
     } catch (error){
         console.error("Erreur dans /api/register :", error);
         return res.status(500).json({ error: "Erreur interne du serveur" });

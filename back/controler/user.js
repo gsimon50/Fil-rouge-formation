@@ -10,67 +10,64 @@ const db = mysql.createConnection({
 
 
 async function getUser(data) {
+    var results = null;
     return new Promise((resolve, reject) => {
-        if((data.username == "") || (data.password == "") || (data.type == "")){
+        if((data.email == "") || (data.password == "")){
             resolve(reject("error data not valid"));
         } else {
-            username = data.username;
+            email = data.email;
             password = data.password;
             type = data.type;
 
-            if(type == "login"){
-                query = "SELECT id FROM users WHERE Name = ? AND Password = ?";
-                setTimeout(() => {
-                    db.query(query, [username,password], (error, results) => {
-                        if (error) {
-                            resolve(reject(error));
-                        }
-                        console.log(results)
-                        resolve (results);
-                    });
-                }, 1000);
-            } else {
-                resolve(reject("error data not valid"));
-            }
+            query = "SELECT id FROM users WHERE Mail = ? AND Password = ?";
+            db.query(query, [email,password], (error, results) => {
+                if (error) {
+                    resolve(reject(error));
+                }
+                resolve (results);
+            });
         }
+
+        return results;
+       
     });
 }
 
 /**
  * 
- * @param {*} data 
+ * @param {*} data  
  * @returns 
  */
 async function setUser(data) {
-    return new Promise((resolve, reject) => {
-        if((data.username == "") || (data.password == "") || (data.type == "")){
-            resolve(reject("error data not valid"));
+    if ((data.email == "") || (data.password == "") || (data.type == "")) {
+        throw new Error("error data not valid");
+    } else {
+        const existingUser = await getUser(data); // Attendre le résultat de getUser
+        if (existingUser && existingUser.length > 0) {
+            return { userexist: true };
         } else {
-            if(getUser(data)){
-                resolve(reject("error user déjà existant"));
-            } else {
-                username = data.username;
-                password = data.password;
-                type = data.type;
-    
-                if(type == "register"){
-                    query = "INSERT INTO users (Name, Password) VALUES ( ?, ?)";
+            const email = data.email;
+            const password = data.password;
+            const type = data.type;
+
+            if (type == "register") {
+                const query = "INSERT INTO users (Mail, Password) VALUES ( ?, ?)";
+                return new Promise((resolve, reject) => {
                     setTimeout(() => {
-                        db.query(query, [username,password], (error, results) => {
+                        db.query(query, [email, password], (error, results) => {
                             if (error) {
-                                resolve(reject(error));
+                                return reject(error);
                             }
-                            console.log(results)
-                            resolve (results);
+                            resolve(results);
                         });
                     }, 1000);
-                } else {
-                    resolve(reject("error data not valid"));
-                }
+                    return { userCreate: true };
+                });
+            } else {
+                throw new Error("error data not valid");
             }
-           
         }
-    });
+    }
 }
 
 module.exports =  { getUser,setUser } ;

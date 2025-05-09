@@ -18,31 +18,47 @@ export class LoginComponent {
 
   constructor(private router: Router, private LoginService:LoginService,private cookieService: CookieService) {}
 
-  username: string = '';
+  email: string = '';
   password: string = '';
   type: string = 'login';
   Title: string = 'Connexion';
   urlText: string = 'Premiere Connexion ?';
   url: string = 'register';
   cookieValue : string = "";
+  logged : string = "";
+
   onSubmit() {
     const dataAPI = {
-      username: this.username,
+      email: this.email,
       password: this.password,
       type: this.type
     };
 
     this.cookieValue = this.cookieService.get('user');
 
+    this.logged = localStorage.getItem('isLoggedIn') || '';
+
+    if (this.logged === 'true') {
+      this.router.navigate(['/home']);
+    }
+
     if (this.type === 'register') {
 
       this.LoginService.setRegister(dataAPI).subscribe({
         next : (data) => {
-          console.log(data)
-          console.log("Register success");
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('userName', this.email);
+          this.router.navigate(['/user']);
+
         },
         error : (error : any) => {
-          console.log(error);
+          if (error.status === 409) {
+            alert('Email existe déjà');
+          } else if (error.status === 500) {
+            console.log('Server error');
+          } else {
+            console.log('Unknown error');
+          }
         },
         complete : () => {
           console.log('Requete Register terminée');
@@ -51,11 +67,12 @@ export class LoginComponent {
     } else {
       this.LoginService.getLogin(dataAPI).subscribe({
         next : (data) => {
-          console.log(data)
-          console.log("Login success");
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', this.email);
+            this.router.navigate(['/user']);
         },
         error : (error : any) => {
-          console.log(error);
+          alert('Email ou mot de passe incorrect');
         },
         complete : () => {
           console.log('Requete Login terminée');
@@ -71,9 +88,13 @@ export class LoginComponent {
       this.Title = 'Création de compte';
       this.urlText = 'Déjà inscrit ?';
       this.url = 'login';
+      this.logged = localStorage.getItem('isLoggedIn') || '';
+    }
 
-      console.log("this.cookieValue");
-      console.log(this.cookieValue);
+    if (this.router.url === '/logout') {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userName');
+      this.router.navigate(['/login']);
     }
   }
 }
