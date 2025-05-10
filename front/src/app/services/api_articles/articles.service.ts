@@ -41,4 +41,13 @@ export class ArticlesService {
   setArticle(data: any) {
     return this.http.post('http://localhost:3000/api/article', data);
   }
+
+  
+  getArticleDetail(idArticle: any) {
+    return this.http.get('http://localhost:3000/api/article-detail&'+ idArticle);
+  }
+
+  setArticleDetail(data: any, idArticle: any) {
+    return this.http.post('http://localhost:3000/api/article-detail', { data : data, idArticle : idArticle });
+  }
 }

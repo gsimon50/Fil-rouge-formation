@@ -1,0 +1,18 @@
+.container-content{
+    padding: 0 20%;
+}
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+}

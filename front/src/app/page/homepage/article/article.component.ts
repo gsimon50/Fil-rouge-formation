@@ -14,6 +14,7 @@ export class ArticleComponent {
     constructor(private apiArticles: ArticlesService) { 
       this.apiArticles.getRecentArticle().subscribe({
         next : (data) => {
+          console.log(data);
           this.articles = data;
         },
         error : (error : any) => {

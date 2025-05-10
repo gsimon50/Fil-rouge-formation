@@ -1,0 +1,9 @@
+
+<div class="container-content">
+    <h1>{{ detailArticles[0].title }}</h1>
+    <div *ngFor="let article of detailArticles">
+        <p>{{ article.Content }}</p>
+    </div>
+</div>
+    
+<button *ngIf="isLoggedIn" (click)="ajouterContenu()">Ajouter du contenu</button>

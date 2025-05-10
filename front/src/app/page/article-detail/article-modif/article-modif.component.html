@@ -1,0 +1,9 @@
+<h1> Modification de l'article {{ idArticle }} </h1>
+
+<form (ngSubmit)="onSubmit()" class="login-container">
+    <label for="Title">Texte :</label>
+    <textarea id="Title" [(ngModel)]="texte" name="Title" required></textarea>
+
+    <button type="submit">Enregistrer le nouveau contenu</button>
+    <br>
+</form>
