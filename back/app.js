@@ -3,6 +3,8 @@ const mysql = require('mysql2'); // Importer mysql2 pour la connexion à la base
 const path = require('path')
 const userRoutes = require('./routes/route'); // Importer le routeur
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 
 const db = mysql.createConnection({
     host: 'localhost', port:3306,    // L'hôte de la base de données (souvent 'localhost' si en local)
@@ -32,6 +34,9 @@ app.use(express.json());
 
 // Middleware pour parser les données URL-encodées
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+  origin: 'http://localhost:4200'
+}));
 
 app.use('/src', express.static(path.join(__dirname, 'src'))); // Rendre les fichiers dans le dossier src disponible
 

@@ -10,7 +10,12 @@
     <input type="file" id="Picture" [(ngModel)]="Picture" name="Picture" required>
 
     <label for="Categorie">Catégorie:</label>
-    <input type="text" id="Categorie" [(ngModel)]="Category" name="Categorie" required>
+    <select id="Categorie" [(ngModel)]="Category" name="Categorie" required>
+        <option value="Stories">Stories</option>
+        <option value="Articles">Articles</option>
+        <option value="Videos">Videos</option>
+        <option value="Popular">Popular</option>
+    </select>
 
     <button type="submit">Enregistrer le nouveau article</button>
     <br>

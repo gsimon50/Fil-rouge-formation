@@ -19,13 +19,14 @@ export class ArticleComponent {
     Tag: string = "";
     Picture: string = "";
     Category: string = "";
-
+    idUser: string = localStorage.getItem('idUser') || '';
     onSubmit() {
       const dataAPI = {
         Title: this.Title,
         Tag: this.Tag,
         Picture: this.Picture,
-        Category: this.Category
+        Category: this.Category,
+        idUser : this.idUser
       };
   
   

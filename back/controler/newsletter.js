@@ -10,16 +10,18 @@ const db = mysql.createConnection({
 
 
 async function setUserNewsletter(data){
-    console.log("setUserNewsletter : ", data);
-    query = "INSERT INTO newsletter (Mail) VALUES ( ?)";
-    setTimeout(() => {
-        db.query(query, [data], (error, results) => {
-            if (error) {
-                resolve(reject(error));
-            }
-            resolve (results);
-        });
-    }, 1000);
+    return new Promise((resolve, reject) => {
+
+        query = "INSERT INTO newsletter (Mail) VALUES ( ?)";
+        setTimeout(() => {
+            db.query(query, [data.email], (error, results) => {
+                if (error) {
+                    resolve(reject(error));
+                }
+                resolve (results);
+            });
+        }, 1000);
+    });
 }
 
 module.exports =   { setUserNewsletter };

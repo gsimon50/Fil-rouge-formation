@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const bcrypt = require('bcrypt');
 const cors = require('cors');
 const { getArticles } = require('../controler/articles');
 const { getArticlesByIdUser } = require('../controler/articles');
@@ -95,7 +94,6 @@ router.get('/api/article&:type', cors(corsOptions), async  (req, res) => {
 
 router.post('/api/article', cors(corsOptions), async  (req, res) => {
 
-    const bodyData = req.body; // Paramètres POST
     const data = req.body; // Récupère les données de la requête POST
     
     try {
@@ -103,11 +101,11 @@ router.post('/api/article', cors(corsOptions), async  (req, res) => {
 
         if(data.functionCall != "getArticleUser" ){
             // Appelle la fonction asynchrone pour insérer un article
-            article = await setArticle(data); // Assurez-vous que setArticle retourne une promesse
+            const article = await setArticle(data); // Assurez-vous que setArticle retourne une promesse
             return res.json(article); // Envoie les données en réponse
         } else {
             // Appelle la fonction asynchrone pour récupérer les articles par ID utilisateur
-            articles = await getArticlesByIdUser(data); // Assurez-vous que getArticlesByIdUser retourne une promesse
+            const articles = await getArticlesByIdUser(data); // Assurez-vous que getArticlesByIdUser retourne une promesse
             return res.status(200).json(articles); // Envoie les données en réponse
         }
     } catch (error) {
@@ -123,28 +121,25 @@ router.post('/api/newsletter', cors(corsOptions), async  (req, res) => {
     try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); 
         // Appelle la fonction asynchrone pour insérer un article
-        newsletter = await setUserNewsletter(data); // Assurez-vous que setArticle retourne une promesse
+        const newsletter = await setUserNewsletter(data); // Assurez-vous que setUserNewsletter retourne une promesse
         return res.json(newsletter); // Envoie les données en réponse
     } catch (error) {
         console.error("Erreur dans /api/newsletter :", error);
         return res.status(500).json({ error: "Erreur interne du serveur" });
     }
 });
-
 
 router.get('/api/newsletter', cors(corsOptions), async  (req, res) => {
     console.log("Newsletter : get")
-    const data = req.body; // Récupère les données de la requête POST
+    const data = req.query; // Utilise req.query pour GET
     try {
         await new Promise((resolve) => setTimeout(resolve, 1000)); 
         // Appelle la fonction asynchrone pour insérer un article
-        newsletter = await setUserNewsletter(data); // Assurez-vous que setArticle retourne une promesse
+        const newsletter = await setUserNewsletter(data); // Assurez-vous que setUserNewsletter retourne une promesse
         return res.json(newsletter); // Envoie les données en réponse
     } catch (error) {
         console.error("Erreur dans /api/newsletter :", error);
         return res.status(500).json({ error: "Erreur interne du serveur" });
     }
 });
-
-
 module.exports = router;

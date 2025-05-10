@@ -57,38 +57,53 @@ async function getArticlesByIdUser(data) {
 }
 
 
-function getCategorie(type){
-    query = 'SELECT id FROM categorie WHERE nom = ?';
+async function getCategorie(type){
+    console.log('getCategorie')
+    console.log(type)
+    const query = 'SELECT id FROM categorie WHERE nom = ?';
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             db.query(query, [type], (error, results) => {
                 if (error) {
-                    console.error(error);
-                    resolve(reject(error));
+                    return reject(error);
                 }
-                resolve (results[0].id);
+                if (results && results.length > 0) {
+                    console.log('id:', results[0].id);
+                    console.log( 'fin getCategorie' )
+                    resolve(results[0].id);
+                } else {
+                    console.log('Aucun résultat trouvé');
+                    resolve(null);
+                }
             });
         }, 1000);
-    })
+    });
 }
 
-function setArticle(data){
-    query = "INSERT INTO users (Title, Picture,Homepage, Tag, Catégorie) VALUES ( ?,?,?,?,?)";
-    setTimeout(() => {
-        console.log(data);
-
-        catExist = getCategorie(data.Catégorie);
-        if (catExist === null){
-            catExist = setCategorie(data.Catégorie);
-        }
-        db.query(query, [data.Title,data.Picture,data.Homepage,data.Tag,catExist], (error, results) => {
-            if (error) {
-                resolve(reject(error));
+async function setArticle(data){
+    console.log('data')
+    console.log(data)
+    const query = "INSERT INTO articles (id_user,Title, Picture,Homepage, Tag, Catégorie) VALUES ( ?,?,?,?,?,?)";
+    return new Promise(async (resolve, reject) => {
+        setTimeout(async () => {
+            let catExist = await getCategorie(data.Category);
+            if (catExist === null){
+                // genere moi une erreur
+                console.log('Categorie non existante')
+                return reject('Categorie non existante');
             }
-            console.log(results)
-            resolve (results);
-        });
-    }, 1000);
+            db.query(query, [data.idUser,data.Title,data.Picture,1,data.Tag,catExist], (error, results) => {
+                if (error) {
+                    console.log('coucou')
+                    console.log(error);
+                    resolve(reject(error));
+                }
+                console.log("results")
+                console.log(results)
+                resolve (results);
+            });
+        }, 1000);
+    });
 }
 
 function setCategorie(data){
