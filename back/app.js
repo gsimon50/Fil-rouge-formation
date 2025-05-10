@@ -43,6 +43,8 @@ app.get('/login', userRoutes)
 app.get('/register', userRoutes)
 app.get('/api/article:type', userRoutes)
 app.post('/api/article', userRoutes)
+app.post('/api/newsletter', userRoutes)
+app.get('/api/newsletter', userRoutes)
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/login', userRoutes)

@@ -41,6 +41,22 @@ async function getArticles(type,limit,orderby) {
     });
 }
 
+async function getArticlesByIdUser(data) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            query = 'SELECT * FROM articles WHERE id_user = ?';
+            db.query(query, [data.id], (error, results) => {
+                if (error) {
+                    resolve(reject(error));
+                } else {
+                    resolve(results);
+                }
+            });
+        }, 1000);
+    });
+}
+
+
 function getCategorie(type){
     query = 'SELECT id FROM categorie WHERE nom = ?';
     return new Promise((resolve, reject) => {
@@ -88,4 +104,4 @@ function setCategorie(data){
     }, 1000);
 }
 
-module.exports =  { getArticles, setArticle } ;
+module.exports =  { getArticles,getArticlesByIdUser, setArticle } ;
