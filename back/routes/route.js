@@ -8,6 +8,9 @@ const { setArticle } = require('../controler/articles');
 const { setUser } = require('../controler/user');
 const { getUser } = require('../controler/user');
 const { setUserNewsletter } = require('../controler/newsletter');
+const { getArticlesContent } = require('../controler/articles');
+const { setArticleContent } = require('../controler/articles');
+
 
 
 const corsOptions = {
@@ -142,4 +145,40 @@ router.get('/api/newsletter', cors(corsOptions), async  (req, res) => {
         return res.status(500).json({ error: "Erreur interne du serveur" });
     }
 });
+
+
+router.get('/api/article-detail:id', async  (req, res) => {
+    const id = req.params.id; // Récupère la valeur du paramètre "id"
+    // Retirer le & si présent au début de l'id
+    const cleanId = id.startsWith('&') ? id.slice(1) : id;
+    if (!cleanId) {
+        return res.status(400).json({ error: "ID d'article manquant" });
+    }
+    try {
+        await new Promise((resolve) => setTimeout(resolve, 1000)); 
+        // Appelle la fonction asynchrone pour récupérer les articles
+        const article = await getArticlesContent(cleanId); // Assurez-vous que getArticles retourne une promesse
+        console.log(article);
+        return res.json(article); // Envoie les données en réponse
+    } catch (error) {
+        console.error("Erreur dans /api/article-detail :", error);
+        return res.status(500).json({ error: "Erreur interne du serveur" });
+    }
+});
+
+router.post('/api/article-detail', cors(corsOptions), async  (req, res) => {
+    console.log('je suis dans le post article-detail');
+    const data = req.body; // Récupère les données de la requête POST
+    console.log(data);
+    try {
+        await new Promise((resolve) => setTimeout(resolve, 1000)); 
+        // Appelle la fonction asynchrone pour récupérer les articles
+        const article = await setArticleContent(data); // Assurez-vous que getArticles retourne une promesse
+        return res.json(article); // Envoie les données en réponse
+    } catch (error) {
+        console.error("Erreur dans /api/article-detail :", error);
+        return res.status(500).json({ error: "Erreur interne du serveur" });
+    }
+});
+
 module.exports = router;

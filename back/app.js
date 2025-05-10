@@ -47,6 +47,8 @@ app.use('/src', express.static(path.join(__dirname, 'src'))); // Rendre les fich
 app.get('/login', userRoutes)
 app.get('/register', userRoutes)
 app.get('/api/article:type', userRoutes)
+app.get('/api/article-detail:id', userRoutes)
+app.post('/api/article-detail', userRoutes)
 app.post('/api/article', userRoutes)
 app.post('/api/newsletter', userRoutes)
 app.get('/api/newsletter', userRoutes)

@@ -119,4 +119,35 @@ function setCategorie(data){
     }, 1000);
 }
 
-module.exports =  { getArticles,getArticlesByIdUser, setArticle } ;
+async function getArticlesContent (id) {
+    console.log(id);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            query = 'SELECT a.*, b.title FROM article_content a INNER JOIN articles b on a.ID_ARTICLE = b.ID  WHERE ID_ARTICLE = ?';
+            db.query(query, [id], (error, results) => {
+                if (error) {
+                    resolve(reject(error));
+                } else {
+                    console.log(results);
+                    resolve(results);
+                }
+            });
+        }, 1000);
+    });
+}
+
+async function setArticleContent(data){
+    const query = "INSERT INTO article_content (ID_ARTICLE,Type, Content) VALUES (?,?, ?)";
+    return new Promise(async (resolve, reject) => {
+        setTimeout(async () => {
+            db.query(query, [data.idArticle,'Texte',data.data], (error, results) => {
+                if (error) {
+                    resolve(reject(error));
+                }
+                resolve (results);
+            });
+        }, 1000);
+    });
+}
+
+module.exports =  { getArticles,getArticlesByIdUser, setArticle, getArticlesContent, setArticleContent } ;
