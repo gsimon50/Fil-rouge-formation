@@ -35,6 +35,7 @@ export class ArticlesService {
   }
 
   getArticleFromUser(idUser: any) {
+    console.log('idUser : ', idUser);
     return this.http.post('http://localhost:3000/api/article', {id : idUser, functionCall :"getArticleUser" });
   }
 

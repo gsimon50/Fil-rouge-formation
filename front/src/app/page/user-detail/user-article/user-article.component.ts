@@ -12,7 +12,7 @@ import { ArticlesService } from '../../../services/api_articles/articles.service
 })
 export class UserArticleComponent {
     articlesUser: any;
-    id: any = localStorage.getItem('userId');
+    id: any = localStorage.getItem('idUser');
     constructor(private apiArticles: ArticlesService) { 
         setTimeout(() => {
             this.apiArticles.getArticleFromUser(this.id).subscribe({

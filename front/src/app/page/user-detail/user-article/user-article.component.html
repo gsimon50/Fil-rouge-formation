@@ -1,8 +1,17 @@
 <h1 >Articles créés par vous</h1>
 
-<ul>
-    <li *ngFor="let article of articlesUser">
- 
-        {{ article.Title }}
-    </li>
-</ul>
+<div *ngIf="articlesUser.length === 0">
+    vous n'avez pas encore d'article
+</div>
+
+<div *ngIf="articlesUser.length > 0">
+    <p>Voici la liste de vos articles :</p>
+
+    <ul>
+        <li *ngFor="let article of articlesUser">
+    
+            <a href="article/{{article.ID}}">{{ article.Title }}</a>
+        </li>
+    </ul>
+
+</div>

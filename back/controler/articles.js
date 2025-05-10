@@ -42,6 +42,7 @@ async function getArticles(type,limit,orderby) {
 }
 
 async function getArticlesByIdUser(data) {
+    console.log(data)
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             query = 'SELECT * FROM articles WHERE id_user = ?';
@@ -49,6 +50,7 @@ async function getArticlesByIdUser(data) {
                 if (error) {
                     resolve(reject(error));
                 } else {
+                    console.log(results);
                     resolve(results);
                 }
             });

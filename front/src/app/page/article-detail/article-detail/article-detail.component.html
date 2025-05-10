@@ -1,8 +1,13 @@
 
 <div class="container-content">
-    <h1>{{ detailArticles[0].title }}</h1>
-    <div *ngFor="let article of detailArticles">
-        <p>{{ article.Content }}</p>
+    <div *ngIf="detailArticles.length > 0">
+        <h1>{{ detailArticles[0].title }}</h1>
+        <div *ngFor="let article of detailArticles">
+            <p>{{ article.Content }}</p>
+        </div>
+    </div>
+    <div *ngIf="detailArticles.length === 0">
+        <p>Aucun contenu à afficher.</p>
     </div>
 </div>
     
