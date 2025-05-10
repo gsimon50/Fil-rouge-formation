@@ -17,23 +17,34 @@ export class ArticleComponent {
   
     Title: string = "";
     Tag: string = "";
-    Picture: string = "";
+    Picture!: File | null;
     Category: string = "";
     idUser: string = localStorage.getItem('idUser') || '';
+
+
+    onFileSelected(event: Event) {
+      const input = event.target as HTMLInputElement;
+      if (input.files && input.files.length > 0) {
+        this.Picture = input.files[0];
+        console.log('Fichier sélectionné :', this.Picture.name);
+      }
+    }
+
+
     onSubmit() {
       const dataAPI = {
         Title: this.Title,
         Tag: this.Tag,
-        Picture: this.Picture,
+        Picture: this.Picture?.name || "",
         Category: this.Category,
         idUser : this.idUser
-      };
-  
+      };  
   
       this.ArticlesService.setArticle(dataAPI).subscribe({
         next : (data) => {
           console.log(data)
           console.log("Création d'article success");
+          alert("Création d'article success");
         },
         error : (error : any) => {
           console.log(error);

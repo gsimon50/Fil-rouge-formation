@@ -7,7 +7,7 @@
     <input type="text" id="Tag" [(ngModel)]="Tag" name="Tag" required>
 
     <label for="Picture">Image:</label>
-    <input type="file" id="Picture" [(ngModel)]="Picture" name="Picture" required>
+    <input type="file" id="Picture" (change)="onFileSelected($event)" name="Picture" required>
 
     <label for="Categorie">Catégorie:</label>
     <select id="Categorie" [(ngModel)]="Category" name="Categorie" required>
